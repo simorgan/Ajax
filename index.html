@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Ajax Training</title>
+  </head>
+  <body>
+    <h1>Ajax Training</h1>
+
+    <button id="button">Get Text File</button>
+
+    <br /><br />
+
+    <div id="text"></div>
+
+    <a href="ajax-JSON/ajax2.html">Ajax Fetch JSON</a>
+    <hr />
+    <a href="ajax-JSON/ajax-api-fetch.html">Ajax Fetch API</a>
+    <hr />
+    <a href="ajax-JSON/ajax-php.html">Ajax With PHP</a>
+    <hr />
+    <a href="ajax-JSON/ajax-from-db.html">Using Ajax to get data from db</a>
+
+    <script>
+      const loadText = () => {
+        //Create XHR Object
+        var xhr = new XMLHttpRequest();
+        // OPEN - type, url/file, async
+        xhr.open('GET', 'sample.txt', true);
+
+        // use this if a loading image is needed
+        xhr.onprogress = function () {
+          console.log(xhr.readyState);
+        };
+
+        xhr.onload = function () {
+          if (this.status == 200) {
+            //console.log(this.responseText);
+            document.getElementById('text').innerHTML = this.responseText;
+          } else if (this.status == 40);
+          {
+            document.getElementById('text').innerHTML = 'Not found!';
+          }
+        };
+        //show if there is an error
+        xhr.onerror = function () {
+          console.log('Request Error...');
+        };
+
+        //sends the request
+        xhr.send();
+      };
+
+      //Create event listener
+      document.getElementById('button').addEventListener('click', loadText);
+    </script>
+  </body>
+</html>
